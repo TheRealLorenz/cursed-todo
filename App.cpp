@@ -78,6 +78,16 @@ void App::on_key_event(int key) {
             inputBox = std::unique_ptr<InputBox>(new InputBox(3, 10, ""));
             break;
         }
+        case 'd': {
+            if (!todos.size()) break;
+
+            todos.erase(todos.begin() + cursor);
+
+            if (cursor == todos.size() && todos.size()) {
+                cursor--;
+            }
+            break;
+        }
         case ' ': {
             if (!todos.size()) break;
 
