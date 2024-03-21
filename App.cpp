@@ -60,12 +60,14 @@ void App::on_key_event(int key) {
             this->should_quit = true;
             break;
         }
+        case 'k':
         case KEY_UP: {
             if (cursor) {
                 cursor--;
             }
             break;
         }
+        case 'j':
         case KEY_DOWN: {
             if (cursor != todos.size() - 1) {
                 cursor++;
@@ -76,7 +78,7 @@ void App::on_key_event(int key) {
             inputBox = std::unique_ptr<InputBox>(new InputBox(3, 10, ""));
             break;
         }
-        case '\r': {
+        case ' ': {
             if (!todos.size()) break;
 
             todos.at(cursor).toggleCompleted();
@@ -106,8 +108,8 @@ void App::render() const {
             line++;
         }
     }
-
     wnoutrefresh(stdscr);
+
     if (inputBox) {
         inputBox->render();
     }
