@@ -11,5 +11,6 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable(cursed-todo main.cpp
               App.h App.cpp
               Todo.h Todo.cpp
+              InputBox.h InputBox.cpp
 )
 target_link_libraries(cursed-todo ${CURSES_LIBRARIES})

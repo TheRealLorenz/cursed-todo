@@ -7,14 +7,12 @@
 #include "InputBox.h"
 #include "Todo.h"
 
-enum Focus { TODO, INPUT };
-
 class App {
 private:
     bool should_quit = false;
     std::vector<Todo> todos;
     int cursor = 0;
-    enum Focus focus = TODO;
+    std::unique_ptr<InputBox> inputBox = nullptr;
 
     void on_key_event(int key);
     void render() const;

@@ -1,5 +1,7 @@
 #include <ncurses.h>
 
+#include <memory>
+
 #include "App.h"
 
 App::App() {
@@ -20,7 +22,7 @@ App::~App() { endwin(); }
 
 void App::run() {
     box(stdscr, 0, 0);
-    this->render();
+    render();
 
     while (!should_quit) {
         int ch = getch();
@@ -31,6 +33,28 @@ void App::run() {
 }
 
 void App::on_key_event(int key) {
+    if (inputBox) {
+        switch (key) {
+            case 27: {
+                inputBox = nullptr;
+                break;
+            }
+            case KEY_BACKSPACE: {
+                inputBox->deleteChar();
+                break;
+            }
+            case '\r': {
+                todos.push_back(Todo(inputBox->getValue()));
+                inputBox = nullptr;
+                break;
+            }
+            default:
+                inputBox->addChar(key);
+                break;
+        }
+        return;
+    }
+
     switch (key) {
         case 'q': {
             this->should_quit = true;
@@ -48,6 +72,10 @@ void App::on_key_event(int key) {
             }
             break;
         }
+        case 'a': {
+            inputBox = std::unique_ptr<InputBox>(new InputBox(3, 10, ""));
+            break;
+        }
         case '\r': {
             if (!todos.size()) break;
 
@@ -58,6 +86,7 @@ void App::on_key_event(int key) {
 }
 
 void App::render() const {
+    wclear(stdscr);
     int line = 1;
 
     attron(A_BOLD);
@@ -78,9 +107,10 @@ void App::render() const {
         }
     }
 
-    if (focus == INPUT) {
-    }
     wnoutrefresh(stdscr);
+    if (inputBox) {
+        inputBox->render();
+    }
 
     doupdate();
 }
