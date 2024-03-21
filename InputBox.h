@@ -8,10 +8,8 @@ private:
     std::string buffer;
 
 public:
-    InputBox(int x, int y, std::string buffer = "") : buffer(buffer) {
-        window = newwin(3, 20, y, x);
-    }
-    ~InputBox() { delwin(window); }
+    InputBox(int x, int y, std::string buffer = "");
+    ~InputBox();
 
     std::string getValue() { return buffer; }
     void addChar(char c) { buffer += c; }
