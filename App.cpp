@@ -12,6 +12,7 @@ App::App() {
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
     curs_set(0);
+    set_escdelay(200);
 
     todos.push_back(Todo("Fare il bucato"));
     todos.push_back(Todo("Fare la spesa"));
