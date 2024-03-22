@@ -76,7 +76,8 @@ void App::on_key_event(int key) {
             break;
         }
         case 'a': {
-            inputBox = std::unique_ptr<InputBox>(new InputBox(3, 10, ""));
+            inputBox = std::unique_ptr<InputBox>(
+                new InputBox(3, 3 + std::max((int)todos.size(), 1), ""));
             break;
         }
         case 'd': {
