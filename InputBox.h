@@ -11,8 +11,8 @@ public:
     InputBox(int x, int y, std::string buffer = "");
     ~InputBox();
 
-    void addChar(char c) { buffer += c; }
     const std::string& getValue() const { return buffer; }
+    void addChar(char c);
     void deleteChar();
     void render() const;
 };

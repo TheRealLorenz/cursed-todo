@@ -20,6 +20,19 @@ void InputBox::render() const {
     wnoutrefresh(window);
 }
 
+void InputBox::addChar(char c) {
+    buffer += c;
+
+    int width, height;
+    getmaxyx(window, height, width);
+
+    // I need to subtract the border (2) and
+    // the cursor (1)
+    if (buffer.length() > width - 3) {
+        wresize(window, height, width + 10);
+    }
+}
+
 void InputBox::deleteChar() {
     if (buffer.length()) {
         buffer.pop_back();
