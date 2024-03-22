@@ -14,5 +14,5 @@ public:
     std::string getValue() { return buffer; }
     void addChar(char c) { buffer += c; }
     void deleteChar();
-    void render();
+    void render() const;
 };

@@ -12,7 +12,7 @@ InputBox::~InputBox() {
     curs_set(0);
 }
 
-void InputBox::render() {
+void InputBox::render() const {
     wmove(window, 1, 1);
     wclrtoeol(window);
     mvwaddstr(window, 1, 1, buffer.c_str());
