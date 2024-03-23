@@ -13,13 +13,16 @@ private:
 public:
     Todo(string value) : value(value) {}
 
-    const string &getValue() const { return value; }
+    const string& getValue() const { return value; }
     void setValue(string value) { this->value = value; }
 
     const bool isCompleted() const { return completed; }
     void setCompleted(bool completed) { this->completed = completed; }
 
     void toggleCompleted() { this->completed = !this->completed; }
+
+    const string serialize() const;
+    static Todo deserialize(const string& data);
 };
 
 #endif
